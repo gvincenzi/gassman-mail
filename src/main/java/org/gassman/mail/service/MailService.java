@@ -8,4 +8,5 @@ import java.io.UnsupportedEncodingException;
 public interface MailService {
     void sendRegistrationMessage(UserDTO userDTO);
     void sendOrderMessage(OrderDTO orderDTO);
+    void sendOrderPaymentConfirmationMessage(OrderDTO orderDTO);
 }

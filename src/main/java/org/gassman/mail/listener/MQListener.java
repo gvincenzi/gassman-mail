@@ -22,4 +22,9 @@ public class MQListener {
     public void processUserOrder(OrderDTO msg) {
         mailService.sendOrderMessage(msg);
     }
+
+    @StreamListener(target = MQBinding.ORDER_PAYMENT_CONFIRMATION)
+    public void processOrderPaymentConfirmation(OrderDTO msg) {
+        mailService.sendOrderPaymentConfirmationMessage(msg);
+    }
 }

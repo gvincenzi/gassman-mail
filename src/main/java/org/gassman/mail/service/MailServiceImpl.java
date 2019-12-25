@@ -25,6 +25,9 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateOrderMessage;
 
+    @Autowired
+    SimpleMailMessage templatePaymentConfirmationMessage;
+
     @Value("${template.paymentURL}")
     public String templatePaymentURL;
 
@@ -42,6 +45,14 @@ public class MailServiceImpl implements MailService {
         message.setSubject("GasSMan Order");
         String paymentURL = String.format(templatePaymentURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
         message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentURL));
+        javaMailSender.send(message);
+    }
+
+    public void sendOrderPaymentConfirmationMessage(OrderDTO orderDTO) throws MailException {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(orderDTO.getUser().getMail());
+        message.setSubject("GasSMan Payment Confirmation");
+        message.setText(String.format(templatePaymentConfirmationMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit()))));
         javaMailSender.send(message);
     }
 

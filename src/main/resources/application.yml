@@ -5,7 +5,7 @@ spring:
   application:
     name: gassman-mail-service
   rabbitmq:
-    addresses: 
+    addresses:
   cloud:
     stream:
       bindings:
@@ -13,6 +13,8 @@ spring:
           destination: gassman-user-registration
         userOrderChannel:
           destination: gassman-order-registration
+        orderPaymentConfirmationChannel:
+          destination: gassman-order-payment-confirmation
 
 eureka:
   instance:
@@ -27,6 +29,7 @@ template:
   registration: "Benvenuto del sistema GasSMan\nLa tua iscrizione e' stata correttamente effettuata con i seguenti dati : \nCognome: %s\nNome: %s\nMail: %s\n\nGrazie\nGasSMan Administrator"
   order: "Ciao %s,\nIl tuo ordine e' stato registrato con successo.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
   paymentURL: "http://localhost:8881/gassman-payment-service/paypal/make/payment?%s"
+  paymentConfirmation: "Ciao %s,\nIl tuo pagamento e' stato registrato con successo.\n\nDettaglio dell'ordine pagato:\n%s\n\nTotale ordine : %s\n\nGrazie\nGasSMan Administrator"
 
 mail:
   host:
