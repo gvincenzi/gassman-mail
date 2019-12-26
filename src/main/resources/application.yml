@@ -5,7 +5,7 @@ spring:
   application:
     name: gassman-mail-service
   rabbitmq:
-    addresses:
+    addresses: amqp://***
   cloud:
     stream:
       bindings:
@@ -30,8 +30,21 @@ template:
   order: "Ciao %s,\nIl tuo ordine e' stato registrato con successo.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
   paymentURL: "http://localhost:8881/gassman-payment-service/paypal/make/payment?%s"
   paymentConfirmation: "Ciao %s,\nIl tuo pagamento e' stato registrato con successo.\n\nDettaglio dell'ordine pagato:\n%s\n\nTotale ordine : %s\n\nGrazie\nGasSMan Administrator"
+  subject:
+    registration: "GasSMan - Registrazione nuovo utente"
+    order: "GasSMan - Conferma nuovo ordine"
+    payment: "GasSMan - Conferma pagamento"
 
 mail:
-  host:
+  host: smtp.yourserver.org
+  port:
   username:
   password:
+
+  transport:
+    protocol: smtp
+
+  smtp:
+    auth: true
+    starttls:
+      enable: true

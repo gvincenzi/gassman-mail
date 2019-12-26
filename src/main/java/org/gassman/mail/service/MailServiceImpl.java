@@ -31,10 +31,19 @@ public class MailServiceImpl implements MailService {
     @Value("${template.paymentURL}")
     public String templatePaymentURL;
 
+    @Value("${template.subject.registration}")
+    public String templateSubjectRegistration;
+
+    @Value("${template.subject.order}")
+    public String templateSubjectOrder;
+
+    @Value("${template.subject.payment}")
+    public String templateSubjectPayment;
+
     public void sendRegistrationMessage(UserDTO userDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(userDTO.getMail());
-        message.setSubject("GasSMan Registration");
+        message.setSubject(templateSubjectRegistration);
         message.setText(String.format(templateRegistrationMessage.getText(), userDTO.getSurname(), userDTO.getName(), userDTO.getMail()));
         javaMailSender.send(message);
     }
@@ -42,7 +51,7 @@ public class MailServiceImpl implements MailService {
     public void sendOrderMessage(OrderDTO orderDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
-        message.setSubject("GasSMan Order");
+        message.setSubject(templateSubjectOrder);
         String paymentURL = String.format(templatePaymentURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
         message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentURL));
         javaMailSender.send(message);
@@ -51,7 +60,7 @@ public class MailServiceImpl implements MailService {
     public void sendOrderPaymentConfirmationMessage(OrderDTO orderDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
-        message.setSubject("GasSMan Payment Confirmation");
+        message.setSubject(templateSubjectPayment);
         message.setText(String.format(templatePaymentConfirmationMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit()))));
         javaMailSender.send(message);
     }

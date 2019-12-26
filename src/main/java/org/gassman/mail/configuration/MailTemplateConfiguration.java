@@ -31,6 +31,9 @@ public class MailTemplateConfiguration{
     @Value("${mail.host}")
     public String mailHost;
 
+    @Value("${mail.port}")
+    public Integer mailPort;
+
     @Bean
     public SimpleMailMessage templateRegistrationMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -56,7 +59,7 @@ public class MailTemplateConfiguration{
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(mailHost);
-        mailSender.setPort(587);
+        mailSender.setPort(mailPort);
 
         mailSender.setUsername(mailUsername);
         mailSender.setPassword(mailPassword);
