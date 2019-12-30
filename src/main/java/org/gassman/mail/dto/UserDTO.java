@@ -13,4 +13,8 @@ public class UserDTO {
     private String surname;
     private String mail;
     private Boolean active = Boolean.TRUE;
+
+    public String toHTTPQuery(String prefix) {
+        return prefix + ".id=" + id;
+    }
 }

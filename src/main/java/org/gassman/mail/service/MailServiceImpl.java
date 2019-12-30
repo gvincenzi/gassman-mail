@@ -9,7 +9,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
@@ -28,8 +27,11 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templatePaymentConfirmationMessage;
 
-    @Value("${template.paymentURL}")
-    public String templatePaymentURL;
+    @Value("${template.paymentPayPalURL}")
+    public String templatePaymentPayPalURL;
+
+    @Value("${template.paymentInternalCreditURL}")
+    public String templatePaymentInternalCreditURL;
 
     @Value("${template.subject.registration}")
     public String templateSubjectRegistration;
@@ -52,8 +54,9 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectOrder);
-        String paymentURL = String.format(templatePaymentURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
-        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentURL));
+        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
         javaMailSender.send(message);
     }
 

@@ -26,6 +26,6 @@ public class OrderDTO {
     }
 
     public String toHTTPQuery() {
-        return "orderId=" + orderId + "&quantity=" + quantity + "&totalToPay=" + getTotalToPay() + product.toHTTPQuery("&product");
+        return "orderId=" + orderId + "&quantity=" + quantity + "&totalToPay=" + getTotalToPay() + product.toHTTPQuery("&product") + user.toHTTPQuery("&user");
     }
 }
