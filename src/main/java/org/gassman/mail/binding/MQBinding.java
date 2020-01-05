@@ -12,6 +12,7 @@ public interface MQBinding {
     String RECHARGE_USER_CREDIT = "rechargeUserCreditChannel";
     String ORDER_NON_PAID_REMINDER = "orderNonPaidReminderChannel";
     String ORDER_PRODUCT_DELIVERY_REMINDER = "orderProductDeliveryReminderChannel";
+    String PRODUCT_UPDATE = "productUpdateChannel";
 
     @Input(USER_REGISTRATION)
     SubscribableChannel userRegistrationChannel();
@@ -30,4 +31,7 @@ public interface MQBinding {
 
     @Input(ORDER_PRODUCT_DELIVERY_REMINDER)
     SubscribableChannel orderProductDeliveryReminderChannel();
+
+    @Input(PRODUCT_UPDATE)
+    SubscribableChannel productUpdateChannel();
 }

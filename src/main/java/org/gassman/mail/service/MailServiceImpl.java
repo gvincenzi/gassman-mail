@@ -39,6 +39,9 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateReminderOrderProductDeliveryMessage;
 
+    @Autowired
+    SimpleMailMessage templateProductUpdateMessage;
+
     @Value("${template.paymentPayPalURL}")
     public String templatePaymentPayPalURL;
 
@@ -62,6 +65,9 @@ public class MailServiceImpl implements MailService {
 
     @Value("${template.subject.reminder.delivery}")
     public String templateSubjectReminderOrderProductDelivery;
+
+    @Value("${template.subject.productupdate}")
+    public String templateSubjectProductUpdate;
 
     public void sendRegistrationMessage(UserDTO userDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -115,6 +121,15 @@ public class MailServiceImpl implements MailService {
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectReminderOrderProductDelivery);
         message.setText(String.format(templateReminderOrderProductDeliveryMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString()));
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendProductUpdateMessage(OrderDTO orderDTO) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(orderDTO.getUser().getMail());
+        message.setSubject(templateSubjectProductUpdate);
+        message.setText(String.format(templateProductUpdateMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString()));
         javaMailSender.send(message);
     }
 

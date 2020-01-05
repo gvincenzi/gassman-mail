@@ -31,6 +31,9 @@ public class MailTemplateConfiguration{
     @Value("${template.orderProductDeliveryReminder}")
     public String templateReminderOrderProductDeliveryMessage;
 
+    @Value("${template.productUpdateMessage}")
+    public String templateProductUpdateMessage;
+
     @Value("${mail.username}")
     public String mailUsername;
 
@@ -82,6 +85,13 @@ public class MailTemplateConfiguration{
     public SimpleMailMessage templateReminderOrderProductDeliveryMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setText(templateReminderOrderProductDeliveryMessage);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateProductUpdateMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateProductUpdateMessage);
         return message;
     }
 

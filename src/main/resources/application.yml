@@ -21,6 +21,8 @@ spring:
           destination: gassman-order-non-paid-reminder
         orderProductDeliveryReminderChannel:
           destination: gassman-order-product-delivery-reminder
+        productUpdateChannel:
+          destination: gassman-product-update
 
 eureka:
   instance:
@@ -40,12 +42,13 @@ template:
   creditrechargeConfirmation: "Ciao %s,\nIl tuo credito e' stato aggiornato:\nCredito precedente  %s euro\nCredito attuale: %s euro\nData e ora dell'aggiornamento: %s\n\nGrazie\nGasSMan Administrator"
   orderNonPaidReminder: "Ciao %s,\nIl tuo ordine non e' ancora stato pagato.\nRicordati di effettuare il pagamento prima della data di consegna.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
   orderProductDeliveryReminder: "Ciao %s,\nRicordati di ritirare il tuo ordine pronto alla consegna nella data prestabilita.\n\nDettaglio dell'ordine:\n%s\n\nGrazie\nGasSMan Administrator"
-
+  productUpdateMessage: "Ciao %s,\nL'amministratore ha modificato alcuni dati relativi al prodotto che hai ordinato.\n\nTrovi qui il dettaglio del tuo ordine con i dati del prodotto modificati:\n%s\n\nGrazie\nGasSMan Administrator"
   subject:
     registration: "GasSMan - Registrazione nuovo utente"
     order: "GasSMan - Conferma nuovo ordine"
     payment: "GasSMan - Conferma pagamento"
     creditrecharge: "GasSMan - Aggiornamento del credito"
+    productupdate: "GasSMan - Modifica dei dati del prodotto ordinato"
     reminder:
       ordernonpaid: "GasSMan - Promemoria - Pagamento di un ordine registrato"
       delivery: "GasSMan - Promemoria - Consegna del tuo ordine"

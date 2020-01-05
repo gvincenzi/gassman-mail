@@ -43,4 +43,9 @@ public class MQListener {
     public void processOrderProductDeliveryReminder(OrderDTO msg) {
         mailService.sendOrderProductDeliveryMessage(msg);
     }
+
+    @StreamListener(target = MQBinding.PRODUCT_UPDATE)
+    public void processProductUpdate(OrderDTO msg) {
+        mailService.sendProductUpdateMessage(msg);
+    }
 }
