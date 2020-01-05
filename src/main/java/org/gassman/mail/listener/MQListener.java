@@ -33,4 +33,14 @@ public class MQListener {
     public void processRechargeUserCredit(RechargeUserCreditLogDTO msg) {
         mailService.sendRechargeUserCreditMessage(msg);
     }
+
+    @StreamListener(target = MQBinding.ORDER_NON_PAID_REMINDER)
+    public void processOrderNonPaidReminder(OrderDTO msg) {
+        mailService.sendOrderNonPaidReminderMessage(msg);
+    }
+
+    @StreamListener(target = MQBinding.ORDER_PRODUCT_DELIVERY_REMINDER)
+    public void processOrderProductDeliveryReminder(OrderDTO msg) {
+        mailService.sendOrderProductDeliveryMessage(msg);
+    }
 }

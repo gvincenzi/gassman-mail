@@ -25,6 +25,12 @@ public class MailTemplateConfiguration{
     @Value("${template.creditrechargeConfirmation}")
     public String templateCreditRechargeConfirmation;
 
+    @Value("${template.orderNonPaidReminder}")
+    public String templateReminderOrderNonPaidMessage;
+
+    @Value("${template.orderProductDeliveryReminder}")
+    public String templateReminderOrderProductDeliveryMessage;
+
     @Value("${mail.username}")
     public String mailUsername;
 
@@ -62,6 +68,20 @@ public class MailTemplateConfiguration{
     public SimpleMailMessage templateCreditRechargeConfirmationMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setText(templateCreditRechargeConfirmation);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateReminderOrderNonPaidMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateReminderOrderNonPaidMessage);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateReminderOrderProductDeliveryMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateReminderOrderProductDeliveryMessage);
         return message;
     }
 

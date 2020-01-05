@@ -8,5 +8,7 @@ public interface MailService {
     void sendRegistrationMessage(UserDTO userDTO);
     void sendOrderMessage(OrderDTO orderDTO);
     void sendOrderPaymentConfirmationMessage(OrderDTO orderDTO);
-    void sendRechargeUserCreditMessage(RechargeUserCreditLogDTO msg);
+    void sendRechargeUserCreditMessage(RechargeUserCreditLogDTO rechargeUserCreditLogDTO);
+    void sendOrderNonPaidReminderMessage(OrderDTO orderDTO);
+    void sendOrderProductDeliveryMessage(OrderDTO orderDTO);
 }

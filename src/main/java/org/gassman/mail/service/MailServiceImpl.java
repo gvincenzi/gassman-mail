@@ -33,6 +33,12 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateCreditRechargeConfirmationMessage;
 
+    @Autowired
+    SimpleMailMessage templateReminderOrderNonPaidMessage;
+
+    @Autowired
+    SimpleMailMessage templateReminderOrderProductDeliveryMessage;
+
     @Value("${template.paymentPayPalURL}")
     public String templatePaymentPayPalURL;
 
@@ -50,6 +56,12 @@ public class MailServiceImpl implements MailService {
 
     @Value("${template.subject.creditrecharge}")
     public String templateSubjectCreditRecharge;
+
+    @Value("${template.subject.reminder.ordernonpaid}")
+    public String templateSubjectReminderOrderNonPaid;
+
+    @Value("${template.subject.reminder.delivery}")
+    public String templateSubjectReminderOrderProductDelivery;
 
     public void sendRegistrationMessage(UserDTO userDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -83,6 +95,26 @@ public class MailServiceImpl implements MailService {
         message.setTo(rechargeUserCreditLogDTO.getUserCredit().getMail());
         message.setSubject(templateSubjectCreditRecharge);
         message.setText(String.format(templateCreditRechargeConfirmationMessage.getText(), rechargeUserCreditLogDTO.getUserCredit().getName(), NumberFormat.getCurrencyInstance().format(rechargeUserCreditLogDTO.getOldCredit()), NumberFormat.getCurrencyInstance().format(rechargeUserCreditLogDTO.getNewCredit()), rechargeUserCreditLogDTO.getRechargeDateTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))));
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendOrderNonPaidReminderMessage(OrderDTO orderDTO) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(orderDTO.getUser().getMail());
+        message.setSubject(templateSubjectReminderOrderNonPaid);
+        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendOrderProductDeliveryMessage(OrderDTO orderDTO) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(orderDTO.getUser().getMail());
+        message.setSubject(templateSubjectReminderOrderProductDelivery);
+        message.setText(String.format(templateReminderOrderProductDeliveryMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString()));
         javaMailSender.send(message);
     }
 

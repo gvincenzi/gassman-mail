@@ -17,6 +17,10 @@ spring:
           destination: gassman-order-payment-confirmation
         rechargeUserCreditChannel:
           destination: gassman-recharge-user-credit
+        orderNonPaidReminderChannel:
+          destination: gassman-order-non-paid-reminder
+        orderProductDeliveryReminderChannel:
+          destination: gassman-order-product-delivery-reminder
 
 eureka:
   instance:
@@ -34,11 +38,17 @@ template:
   paymentInternalCreditURL: "http://localhost:8881/gassman-payment-service/internal-credit/make/payment?%s"
   paymentConfirmation: "Ciao %s,\nIl tuo pagamento e' stato registrato con successo.\n\nDettaglio dell'ordine pagato:\n%s\n\nTotale ordine : %s\n\nGrazie\nGasSMan Administrator"
   creditrechargeConfirmation: "Ciao %s,\nIl tuo credito e' stato aggiornato:\nCredito precedente  %s euro\nCredito attuale: %s euro\nData e ora dell'aggiornamento: %s\n\nGrazie\nGasSMan Administrator"
+  orderNonPaidReminder: "Ciao %s,\nIl tuo ordine non e' ancora stato pagato.\nRicordati di effettuare il pagamento prima della data di consegna.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
+  orderProductDeliveryReminder: "Ciao %s,\nRicordati di ritirare il tuo ordine pronto alla consegna nella data prestabilita.\n\nDettaglio dell'ordine:\n%s\n\nGrazie\nGasSMan Administrator"
+
   subject:
     registration: "GasSMan - Registrazione nuovo utente"
     order: "GasSMan - Conferma nuovo ordine"
     payment: "GasSMan - Conferma pagamento"
     creditrecharge: "GasSMan - Aggiornamento del credito"
+    reminder:
+      ordernonpaid: "GasSMan - Promemoria - Pagamento di un ordine registrato"
+      delivery: "GasSMan - Promemoria - Consegna del tuo ordine"
 
 mail:
   host: smtp.yourserver.org
