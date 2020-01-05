@@ -22,6 +22,9 @@ public class MailTemplateConfiguration{
     @Value("${template.paymentConfirmation}")
     public String templatePaymentConfirmation;
 
+    @Value("${template.creditrechargeConfirmation}")
+    public String templateCreditRechargeConfirmation;
+
     @Value("${mail.username}")
     public String mailUsername;
 
@@ -52,6 +55,13 @@ public class MailTemplateConfiguration{
     public SimpleMailMessage templatePaymentConfirmationMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setText(templatePaymentConfirmation);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateCreditRechargeConfirmationMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateCreditRechargeConfirmation);
         return message;
     }
 

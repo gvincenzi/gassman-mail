@@ -2,6 +2,7 @@ package org.gassman.mail.listener;
 
 import org.gassman.mail.binding.MQBinding;
 import org.gassman.mail.dto.OrderDTO;
+import org.gassman.mail.dto.RechargeUserCreditLogDTO;
 import org.gassman.mail.dto.UserDTO;
 import org.gassman.mail.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,10 @@ public class MQListener {
     @StreamListener(target = MQBinding.ORDER_PAYMENT_CONFIRMATION)
     public void processOrderPaymentConfirmation(OrderDTO msg) {
         mailService.sendOrderPaymentConfirmationMessage(msg);
+    }
+
+    @StreamListener(target = MQBinding.RECHARGE_USER_CREDIT)
+    public void processRechargeUserCredit(RechargeUserCreditLogDTO msg) {
+        mailService.sendRechargeUserCreditMessage(msg);
     }
 }

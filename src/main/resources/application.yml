@@ -15,6 +15,8 @@ spring:
           destination: gassman-order-registration
         orderPaymentConfirmationChannel:
           destination: gassman-order-payment-confirmation
+        rechargeUserCreditChannel:
+          destination: gassman-recharge-user-credit
 
 eureka:
   instance:
@@ -31,10 +33,12 @@ template:
   paymentPayPalURL: "http://localhost:8881/gassman-payment-service/paypal/make/payment?%s"
   paymentInternalCreditURL: "http://localhost:8881/gassman-payment-service/internal-credit/make/payment?%s"
   paymentConfirmation: "Ciao %s,\nIl tuo pagamento e' stato registrato con successo.\n\nDettaglio dell'ordine pagato:\n%s\n\nTotale ordine : %s\n\nGrazie\nGasSMan Administrator"
+  creditrechargeConfirmation: "Ciao %s,\nIl tuo credito e' stato aggiornato:\nCredito precedente  %s euro\nCredito attuale: %s euro\nData e ora dell'aggiornamento: %s\n\nGrazie\nGasSMan Administrator"
   subject:
     registration: "GasSMan - Registrazione nuovo utente"
     order: "GasSMan - Conferma nuovo ordine"
     payment: "GasSMan - Conferma pagamento"
+    creditrecharge: "GasSMan - Aggiornamento del credito"
 
 mail:
   host: smtp.yourserver.org
