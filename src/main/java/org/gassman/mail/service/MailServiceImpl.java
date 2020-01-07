@@ -81,8 +81,8 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectOrder);
-        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
-        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery(true)).replaceAll(" ","%20");
+        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery(false)).replaceAll(" ","%20");
         message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
         javaMailSender.send(message);
     }
@@ -109,8 +109,8 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectReminderOrderNonPaid);
-        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
-        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
+        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery(true)).replaceAll(" ","%20");
+        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.toHTTPQuery(false)).replaceAll(" ","%20");
         message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
         javaMailSender.send(message);
     }

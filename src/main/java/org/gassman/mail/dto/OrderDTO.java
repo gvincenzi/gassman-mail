@@ -25,7 +25,7 @@ public class OrderDTO {
                 && this.getProduct().getPricePerUnit() != null ? new BigDecimal(getQuantity()).multiply(getProduct().getPricePerUnit()).toString() : null;
     }
 
-    public String toHTTPQuery() {
-        return "orderId=" + orderId + "&quantity=" + quantity + "&totalToPay=" + getTotalToPay() + product.toHTTPQuery("&product") + user.toHTTPQuery("&user");
+    public String toHTTPQuery(Boolean withProduct) {
+        return "orderId=" + orderId + "&quantity=" + quantity + "&totalToPay=" + getTotalToPay() + user.toHTTPQuery("&user") + (withProduct ? product.toHTTPQuery("&product") : "");
     }
 }
