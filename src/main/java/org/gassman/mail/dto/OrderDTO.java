@@ -20,12 +20,7 @@ public class OrderDTO {
                 "\nProdotto : " + product;
     }
 
-    public String getTotalToPay(){
-        return this.getQuantity() != null && this.getProduct() != null
-                && this.getProduct().getPricePerUnit() != null ? new BigDecimal(getQuantity()).multiply(getProduct().getPricePerUnit()).toString() : null;
-    }
-
-    public String toHTTPQuery(Boolean withProduct) {
-        return "orderId=" + orderId + "&quantity=" + quantity + "&totalToPay=" + getTotalToPay() + user.toHTTPQuery("&user") + (withProduct ? product.toHTTPQuery("&product") : "");
+    public String toHTTPQuery() {
+        return "orderId=" + orderId + "&quantity=" + quantity + user.toHTTPQuery("&user") + product.toHTTPQuery("&product");
     }
 }
