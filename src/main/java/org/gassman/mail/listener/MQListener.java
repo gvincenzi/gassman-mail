@@ -48,4 +48,14 @@ public class MQListener {
     public void processProductUpdate(OrderDTO msg) {
         mailService.sendProductUpdateMessage(msg);
     }
+
+    @StreamListener(target = MQBinding.ORDER_CANCELLATION)
+    public void processOrderCancellation(OrderDTO msg) {
+        mailService.sendOrderCancellationMessage(msg);
+    }
+
+    @StreamListener(target = MQBinding.USER_CANCELLATION)
+    public void processOrderCancellation(UserDTO msg) {
+        mailService.sendUserCancellationMessage(msg);
+    }
 }

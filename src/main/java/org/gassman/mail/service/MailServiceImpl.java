@@ -42,6 +42,12 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateProductUpdateMessage;
 
+    @Autowired
+    SimpleMailMessage templateUserCancellationMessage;
+
+    @Autowired
+    SimpleMailMessage templateOrderCancellationMessage;
+
     @Value("${template.paymentPayPalURL}")
     public String templatePaymentPayPalURL;
 
@@ -69,11 +75,26 @@ public class MailServiceImpl implements MailService {
     @Value("${template.subject.productupdate}")
     public String templateSubjectProductUpdate;
 
+    @Value("${template.subject.usercancellation}")
+    public String templateSubjectUserCancellation;
+
+    @Value("${template.subject.ordercancellation}")
+    public String templateSubjectOrderCancellation;
+
     public void sendRegistrationMessage(UserDTO userDTO) throws MailException {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(userDTO.getMail());
         message.setSubject(templateSubjectRegistration);
         message.setText(String.format(templateRegistrationMessage.getText(), userDTO.getSurname(), userDTO.getName(), userDTO.getMail()));
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendUserCancellationMessage(UserDTO userDTO) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(userDTO.getMail());
+        message.setSubject(templateSubjectUserCancellation);
+        message.setText(String.format(templateUserCancellationMessage.getText(), userDTO.getSurname()));
         javaMailSender.send(message);
     }
 
@@ -130,6 +151,15 @@ public class MailServiceImpl implements MailService {
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectProductUpdate);
         message.setText(String.format(templateProductUpdateMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString()));
+        javaMailSender.send(message);
+    }
+
+    @Override
+    public void sendOrderCancellationMessage(OrderDTO orderDTO) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(orderDTO.getUser().getMail());
+        message.setSubject(templateSubjectOrderCancellation);
+        message.setText(String.format(templateOrderCancellationMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString()));
         javaMailSender.send(message);
     }
 

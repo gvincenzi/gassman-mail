@@ -13,6 +13,8 @@ public interface MQBinding {
     String ORDER_NON_PAID_REMINDER = "orderNonPaidReminderChannel";
     String ORDER_PRODUCT_DELIVERY_REMINDER = "orderProductDeliveryReminderChannel";
     String PRODUCT_UPDATE = "productUpdateChannel";
+    String USER_CANCELLATION = "userCancellationChannel";
+    String ORDER_CANCELLATION = "orderCancellationChannel";
 
     @Input(USER_REGISTRATION)
     SubscribableChannel userRegistrationChannel();
@@ -34,4 +36,10 @@ public interface MQBinding {
 
     @Input(PRODUCT_UPDATE)
     SubscribableChannel productUpdateChannel();
+
+    @Input(USER_CANCELLATION)
+    SubscribableChannel userCancellationChannel();
+
+    @Input(ORDER_CANCELLATION)
+    SubscribableChannel orderCancellationChannel();
 }

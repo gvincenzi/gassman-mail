@@ -34,6 +34,12 @@ public class MailTemplateConfiguration{
     @Value("${template.productUpdateMessage}")
     public String templateProductUpdateMessage;
 
+    @Value("${template.orderCancellationMessage}")
+    public String templateOrderCancellationMessage;
+
+    @Value("${template.userCancellationMessage}")
+    public String templateUserCancellationMessage;
+
     @Value("${mail.username}")
     public String mailUsername;
 
@@ -92,6 +98,20 @@ public class MailTemplateConfiguration{
     public SimpleMailMessage templateProductUpdateMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setText(templateProductUpdateMessage);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateOrderCancellationMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateOrderCancellationMessage);
+        return message;
+    }
+
+    @Bean
+    public SimpleMailMessage templateUserCancellationMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(templateUserCancellationMessage);
         return message;
     }
 
