@@ -48,9 +48,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateOrderCancellationMessage;
 
-    @Value("${template.paymentPayPalURL}")
-    public String templatePaymentPayPalURL;
-
     @Value("${template.paymentInternalCreditURL}")
     public String templatePaymentInternalCreditURL;
 
@@ -102,9 +99,8 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectOrder);
-        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
         String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.getOrderId()).replaceAll(" ","%20");
-        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
+        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL));
         javaMailSender.send(message);
     }
 
@@ -130,9 +126,8 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectReminderOrderNonPaid);
-        String paymentPayPalURL = String.format(templatePaymentPayPalURL,orderDTO.toHTTPQuery()).replaceAll(" ","%20");
         String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.getOrderId()).replaceAll(" ","%20");
-        message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL,paymentPayPalURL));
+        message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL));
         javaMailSender.send(message);
     }
 

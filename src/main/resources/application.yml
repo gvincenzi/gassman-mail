@@ -39,12 +39,11 @@ eureka:
 
 template:
   registration: "Benvenuto del sistema GasSMan\nLa tua iscrizione e' stata correttamente effettuata con i seguenti dati : \nCognome: %s\nNome: %s\nMail: %s\n\nGrazie\nGasSMan Administrator"
-  order: "Ciao %s,\nIl tuo ordine e' stato registrato con successo.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
-  paymentPayPalURL: "http://localhost:8881/gassman-payment-service/paypal/make/payment?%s"
-  paymentInternalCreditURL: "http://localhost:8881/gassman-payment-service/internal-credit/make/payment/%d"
+  order: "Ciao %s,\nIl tuo ordine e' stato registrato con successo.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
+  paymentInternalCreditURL: "http://localhost:8881/gassman-payment-service/public/internal-credit/make/payment/%d"
   paymentConfirmation: "Ciao %s,\nIl tuo pagamento e' stato registrato con successo.\n\nDettaglio dell'ordine pagato:\n%s\n\nTotale ordine : %s\n\nGrazie\nGasSMan Administrator"
   creditrechargeConfirmation: "Ciao %s,\nIl tuo credito e' stato aggiornato:\nCredito precedente  %s euro\nCredito attuale: %s euro\nData e ora dell'aggiornamento: %s\n\nGrazie\nGasSMan Administrator"
-  orderNonPaidReminder: "Ciao %s,\nIl tuo ordine non e' ancora stato pagato.\nRicordati di effettuare il pagamento prima della data di consegna.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nSe vuoi pagare con PayPal clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
+  orderNonPaidReminder: "Ciao %s,\nIl tuo ordine non e' ancora stato pagato.\nRicordati di effettuare il pagamento prima della data di consegna.\n\nDettaglio dell'ordine:\n%s\n\nTotale ordine : %s\n\nSe vuoi pagare con il tuo credito GasSMan clicca sul link che segue:\n%s\n\nGrazie\nGasSMan Administrator"
   orderProductDeliveryReminder: "Ciao %s,\nRicordati di ritirare il tuo ordine pronto alla consegna nella data prestabilita.\n\nDettaglio dell'ordine:\n%s\n\nGrazie\nGasSMan Administrator"
   productUpdateMessage: "Ciao %s,\nL'amministratore ha modificato alcuni dati relativi al prodotto che hai ordinato.\n\nTrovi qui il dettaglio del tuo ordine con i dati del prodotto modificati:\n%s\n\nGrazie\nGasSMan Administrator"
   orderCancellationMessage: "Ciao %s,\nL'amministratore ha cancellato un tuo ordine (oppure un prodotto che avevi ordinato).\n\nTrovi qui il dettaglio del tuo ordine annullato:\n%s\n\nSe avevi già pagato con il credito interno GasSMan sarai rimborsato e riceverai una mail con l'aggiornamento del tuo credito residuo.\n\nGrazie\nGasSMan Administrator"
