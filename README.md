@@ -4,18 +4,14 @@ GAS (Gruppo di Acquisto Solidale) Sales Management è un sistema Java basato su 
 GasSMan ha come scopo quello di fornire ad un amminstratore di un GAS un'interfaccia per configurare la lista dei prodotti in distribuzione, e un bot grazie al quale gli inscritti possono consultare l'elenco dei prodotti disponibili ed effettuare gli ordini.
 
 ## Didactical Scope
-Questo repository è un modulo di un progetto Java di esempio descritto nel libro (scritto in lingua italiana) **"Anche i microservizi nel loro piccolo s'incazzano- Guida alla comprensione dei principi di un'architettura in microservizi"** di [Giuseppe Vincenzi](https://gvincenzi.tumblr.com/).
+Questo repository è un modulo di un progetto Java di esempio descritto nel libro (scritto in lingua italiana) **"Anche i microservizi nel loro piccolo s'incazzano - Guida alla comprensione dei principi di un'architettura in microservizi"** di [Giuseppe Vincenzi](https://gvincenzi.tumblr.com/).
 
 ## Technologies
 Technologies used in this module of the project:
 - Spring Boot
 - Netflix Eureka Server
-- Spring Data JPA
-- Spring Data REST
-- Spring Security
-- Open Feign
+- Spring Boot Mail
 - RabbitMQ
-- H2 database
 - Lombok
 - Maven
 
