@@ -48,9 +48,6 @@ public class MailServiceImpl implements MailService {
     @Autowired
     SimpleMailMessage templateOrderCancellationMessage;
 
-    @Value("${template.paymentInternalCreditURL}")
-    public String templatePaymentInternalCreditURL;
-
     @Value("${template.subject.registration}")
     public String templateSubjectRegistration;
 
@@ -99,8 +96,7 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectOrder);
-        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.getOrderId()).replaceAll(" ","%20");
-        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL));
+        message.setText(String.format(templateOrderMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit()))));
         javaMailSender.send(message);
     }
 
@@ -126,8 +122,7 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(orderDTO.getUser().getMail());
         message.setSubject(templateSubjectReminderOrderNonPaid);
-        String paymentInternalCreditURL = String.format(templatePaymentInternalCreditURL,orderDTO.getOrderId()).replaceAll(" ","%20");
-        message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit())),paymentInternalCreditURL));
+        message.setText(String.format(templateReminderOrderNonPaidMessage.getText(), orderDTO.getUser().getName(), orderDTO.toString(), NumberFormat.getCurrencyInstance().format(new BigDecimal(orderDTO.getQuantity()).multiply(orderDTO.getProduct().getPricePerUnit()))));
         javaMailSender.send(message);
     }
 
